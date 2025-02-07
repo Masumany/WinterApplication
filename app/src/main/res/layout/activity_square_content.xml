@@ -1,0 +1,40 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SquareContentActivity"
+    android:background="@color/white">
+
+
+    <TextView
+        android:id="@+id/net_back"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_below="@+id/title_text_view"
+        android:layout_marginStart="304dp"
+        android:layout_marginTop="-25dp"
+        android:background="#F8D8FD"
+        android:text="返回"
+        android:textColor="#9B5F5F"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/title_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:padding="16dp"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
+
+
+
+
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/net_back"/>
+
+</RelativeLayout>
