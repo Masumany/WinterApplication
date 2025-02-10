@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/home"
+        android:title="首页" />
+    <item
+        android:id="@+id/navigation_structure"
+        android:icon="@drawable/list"
+        android:title="体系" />
+    <item
+        android:id="@+id/navigation_director"
+        android:icon="@drawable/director"
+        android:title="导航" />
+    <item
+        android:id="@+id/navigation_mine"
+        android:icon="@drawable/user"
+        android:title="我的" />
+</menu>

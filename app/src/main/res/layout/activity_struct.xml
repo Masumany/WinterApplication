@@ -8,59 +8,12 @@
     tools:context=".StructActivity"
     android:background="@color/white">
 
-
-
-    <TextView
-        android:id="@+id/st_article"
-        android:layout_width="200dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="16dp"
-        android:text="点击查看体系下的文章吧！>>"
-        android:textColor="#2196F3"
-        android:textSize="10sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/struct_rv"
-        android:layout_width="match_parent"
-        android:layout_height="480dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="60dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:layout_width="500dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="28dp"
-        android:text="-----------------------------------------------------------------------------------------------------------------"
-        android:textColor="#3F51B5"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-
-
-    <SearchView
-        android:id="@+id/searchView"
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="40dp"
-        android:queryHint="搜索体系"
-        app:iconifiedByDefault="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+    <!-- 返回按钮 -->
     <TextView
         android:id="@+id/net_back"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginStart="304dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="4dp"
         android:background="#F8D8FD"
         android:text="返回"
@@ -68,21 +21,7 @@
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
-
-
-    <TextView
-        android:layout_width="500dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="536dp"
-        android:text="-----------------------------------------------------------------------------------------------------------------"
-        android:textColor="#3F51B5"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+    <!-- 体系标题 -->
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -94,96 +33,73 @@
         android:shadowRadius="3.0"
         android:shadowDx="9"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-
-    <ImageView
-        android:id="@+id/first"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="556dp"
-        android:src="@drawable/home_first"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- 顶部横线 -->
     <TextView
-        android:layout_width="50dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="584dp"
-        android:text="首 页"
-        android:textSize="20dp"
+        android:id="@id/link"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="28dp"
+        android:text="--------------------------------------------"
+        android:textColor="#3F51B5"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/struct"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="116dp"
-        android:layout_marginTop="556dp"
-        android:src="@drawable/knowledge_second"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:layout_width="50dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="108dp"
-        android:layout_marginTop="584dp"
-        android:text="体 系"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!-- 提示文本 -->
 
     <ImageView
-        android:id="@+id/director"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="212dp"
-        android:layout_marginTop="556dp"
-        android:src="@drawable/director_first"
+        android:id="@+id/st_article"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+       android:src="@drawable/st_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/textView" />
 
-    <TextView
-        android:layout_width="50dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="204dp"
-        android:layout_marginTop="584dp"
-        android:text="导 航"
-        android:textSize="20dp"
-        android:textStyle="bold"
+    <!-- 搜索框 -->
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="40dp"
+        android:queryHint="搜索体系"
+        app:iconifiedByDefault="false"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/st_article" />
 
-    <ImageView
-        android:id="@+id/mine"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="304dp"
-        android:layout_marginTop="556dp"
-        android:src="@drawable/my_first"
+    <!-- RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/struct_rv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/searchView" />
 
-    <TextView
-        android:layout_width="50dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="296dp"
-        android:layout_marginTop="584dp"
-        android:text="我 的"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- 底部导航栏 -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:itemIconSize="35dp"
+        app:itemIconTint="@color/bottom_nav_item_color"
+        app:itemTextColor="@color/bottom_nav_item_color"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/struct_rv"
+        app:menu="@menu/bottom_menu"
+        tools:layout_editor_absoluteX="4dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

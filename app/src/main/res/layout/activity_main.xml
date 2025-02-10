@@ -9,9 +9,6 @@
     tools:context=".MainActivity">
 
     <!-- 顶部横线 -->
-
-    <!-- 返回按钮 -->
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,6 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- 返回按钮 -->
     <TextView
         android:id="@+id/net_back"
         android:layout_width="wrap_content"
@@ -36,22 +34,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- 底部横线 -->
-
     <!-- 首页标题 -->
-
-    <TextView
-        android:id="@+id/link"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:text="--------------------------------------------"
-        android:textColor="#3F51B5"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recycleview" />
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -70,108 +53,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <!-- 首页图标 -->
-
-    <!-- 首页文字 -->
-
-    <ImageView
-        android:id="@+id/home"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/home_second"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/link" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        android:text="首 页"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home" />
-
-    <!-- 体系图标 -->
-
-    <!-- 体系文字 -->
-    <ImageView
-        android:id="@+id/struct"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="116dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/knowledge_first"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/link" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="108dp"
-        android:layout_marginTop="4dp"
-        android:text="体 系"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/struct" />
-
-    <!-- 导航图标 -->
-
-    <!-- 导航文字 -->
-    <ImageView
-        android:id="@+id/director"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="212dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/director_first"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/link" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="204dp"
-        android:layout_marginTop="4dp"
-        android:text="导 航"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/director" />
-
-    <!-- 我的图标 -->
-
-    <!-- 我的文字 -->
-    <ImageView
-        android:id="@+id/mine"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="304dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/my_first"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/link" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="296dp"
-        android:layout_marginTop="4dp"
-        android:text="我 的"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mine" />
-
     <!-- 轮播图 -->
-
-    <!-- 搜索框 -->
-
-    <!-- 列表 -->
     <com.youth.banner.Banner
         android:id="@+id/banner"
         android:layout_width="0dp"
@@ -188,6 +70,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.9" />
 
+    <!-- 搜索框 -->
     <SearchView
         android:id="@+id/searchView"
         android:layout_width="0dp"
@@ -202,16 +85,31 @@
         app:layout_constraintTop_toBottomOf="@+id/banner"
         app:layout_constraintWidth_percent="0.9" />
 
+    <!-- 列表 -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/link"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.45"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchView" />
+
+
+    <!-- 底部导航栏 -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:itemIconSize="35dp"
+        app:itemIconTint="@color/bottom_nav_item_color"
+        app:itemTextColor="@color/bottom_nav_item_color"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recycleview"
+        app:menu="@menu/bottom_menu"
+        tools:layout_editor_absoluteX="0dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

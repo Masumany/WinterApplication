@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -42,7 +44,7 @@ public class StructActivity extends AppCompatActivity {
     private SearchView searchView;
 
     List<StructNew.Category.SubCategory> filteredList=new ArrayList<>();
-
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,32 +74,33 @@ public class StructActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapter);//将数据通过适配器绑在 RV 上
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));//线性布局
 
-        ImageView imageView = findViewById(R.id.first);
-        imageView.setOnClickListener(new View.OnClickListener() {
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
+
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(StructActivity.this, MainActivity.class);
-                startActivity(intent);
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.navigation_home) {
+                    Intent intent1 = new Intent(StructActivity.this, MainActivity.class);
+                    startActivity(intent1);
+                    return true;
+                } else if (item.getItemId() == R.id.navigation_structure) {
+
+                    return true;
+                } else if (item.getItemId() == R.id.navigation_director) {
+                    Intent intent2 = new Intent(StructActivity.this, DirectorActivity.class);
+                    startActivity(intent2);
+                    return true;
+                } else if (item.getItemId() == R.id.navigation_mine) {
+                    Intent intent3 = new Intent(StructActivity.this, MineActivity.class);
+                    startActivity(intent3);
+                    return true;
+                }
+                return false;
             }
         });
-        ImageView imageView1 = findViewById(R.id.director);
-        imageView1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(StructActivity.this, DirectorActivity.class);
-                startActivity(intent);
-            }
-        });
-        ImageView imageView2 = findViewById(R.id.mine);
-        imageView2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(StructActivity.this, MineActivity.class);
-                startActivity(intent);
-            }
-        });
-        TextView textView=findViewById(R.id.st_article);
-        textView.setOnClickListener(new View.OnClickListener() {
+        bottomNavigationView.setSelectedItemId(R.id.navigation_structure);
+        ImageView imgView=findViewById(R.id.st_article);
+        imgView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(StructActivity.this,StructArticle.class);

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -15,6 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -35,6 +38,7 @@ public class DirectorActivity extends AppCompatActivity {
 
     private SearchView searchView;
     List<DirectorNews.Articles> filteredList = new ArrayList<>();
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,24 +72,32 @@ public class DirectorActivity extends AppCompatActivity {
         initClick();
 
         // 为 ImageView 设置点击事件
-        ImageView structImageView = findViewById(R.id.struct);
-        structImageView.setOnClickListener(v -> {
-            Intent intent = new Intent(DirectorActivity.this, StructActivity.class);
-            startActivity(intent);
-        });
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
 
-        ImageView firstImageView = findViewById(R.id.first);
-        firstImageView.setOnClickListener(v -> {
-            Intent intent = new Intent(DirectorActivity.this, MainActivity.class);
-            startActivity(intent);
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.navigation_home) {
+                    Intent intent1 = new Intent(DirectorActivity.this, MainActivity.class);
+                    startActivity(intent1);
+                    return true;
+                } else if (item.getItemId() == R.id.navigation_structure) {
+                    Intent intent2 = new Intent(DirectorActivity.this, StructActivity.class);
+                    startActivity(intent2);
+                    return true;
+                } else if (item.getItemId() == R.id.navigation_director) {
+                    return true;
+                } else if (item.getItemId() == R.id.navigation_mine) {
+                    Intent intent3 = new Intent(DirectorActivity.this, MineActivity.class);
+                    startActivity(intent3);
+                    return true;
+                }
+                return false;
+            }
         });
-
-        ImageView mineImageView = findViewById(R.id.mine);
-        mineImageView.setOnClickListener(v -> {
-            Intent intent = new Intent(DirectorActivity.this, MineActivity.class);
-            startActivity(intent);
-        });
+        bottomNavigationView.setSelectedItemId(R.id.navigation_director);
     }
+
 
     private void filter(String text) {
         filteredList.clear();

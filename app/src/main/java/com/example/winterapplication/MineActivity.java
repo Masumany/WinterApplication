@@ -3,47 +3,52 @@ package com.example.winterapplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class MineActivity extends AppCompatActivity {
 
     private TextView BackTextView,textView,textView1,textView2;
 
-
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mine);
-        ImageView imageView=findViewById(R.id.struct);
-        imageView.setOnClickListener(new View.OnClickListener() {
+        // 初始化底部导航栏
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
+
             @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(MineActivity.this, StructActivity.class);
-                startActivity(intent);
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.navigation_home) {
+                    Intent intent3 = new Intent(MineActivity.this, MainActivity.class);
+                    startActivity(intent3);
+                    return true;
+                } else if (item.getItemId() == R.id.navigation_structure) {
+                    Intent intent1 = new Intent(MineActivity.this, StructActivity.class);
+                    startActivity(intent1);
+                    return true;
+                } else if (item.getItemId() == R.id.navigation_director) {
+                    Intent intent2 = new Intent(MineActivity.this, DirectorActivity.class);
+                    startActivity(intent2);
+                    return true;
+                } else if (item.getItemId() == R.id.navigation_mine) {
+                    return true;
+                }
+                return false;
             }
         });
-        ImageView imageView1=findViewById(R.id.first);
-        imageView1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(MineActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
-        ImageView imageView2=findViewById(R.id.director);
-        imageView2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(MineActivity.this, DirectorActivity.class);
-                startActivity(intent);
-            }
-        });
+        bottomNavigationView.setSelectedItemId(R.id.navigation_mine);
         ImageView imageView3=findViewById(R.id.mine_user);
         textView=findViewById(R.id.mine_text);
         imageView3.setOnClickListener(new View.OnClickListener() {
