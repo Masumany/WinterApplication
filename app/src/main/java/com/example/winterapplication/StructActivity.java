@@ -9,7 +9,9 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -21,6 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -42,6 +45,9 @@ public class StructActivity extends AppCompatActivity {
     private TextView BackTextView;
 
     private SearchView searchView;
+
+    private FloatingActionButton returnTop;
+
 
     List<StructNew.Category.SubCategory> filteredList=new ArrayList<>();
     private BottomNavigationView bottomNavigationView;
@@ -97,6 +103,32 @@ public class StructActivity extends AppCompatActivity {
                 }
                 return false;
             }
+        });
+        returnTop=findViewById(R.id.fab);
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                LinearLayoutManager manger=(LinearLayoutManager) recyclerView.getLayoutManager();
+                int firstVisibleItemPosition=manger.findFirstVisibleItemPosition();
+                if (newState==RecyclerView.SCROLL_STATE_IDLE) {
+                    if (firstVisibleItemPosition == 0) {
+                        returnTop.hide();
+                    } else {
+                        //显示回到顶部按钮
+                        returnTop.show();
+                        returnTop.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                recyclerView.scrollToPosition(0);
+                            }
+                        });
+                    }
+                }else if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {//拖动中
+                    returnTop.hide();
+                }
+                }
+
         });
         bottomNavigationView.setSelectedItemId(R.id.navigation_structure);
         ImageView imgView=findViewById(R.id.st_article);

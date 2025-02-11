@@ -7,7 +7,9 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,8 +19,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.youth.banner.Banner;
@@ -44,6 +48,10 @@ public class MainActivity extends AppCompatActivity {
 
     private SearchView searchView;
 
+    private SwipeRefreshLayout swipeRefreshLayout;
+
+    private FloatingActionButton returnTop;
+
     List<News.Data.Datas> filteredList = new ArrayList<>();
 
     private BottomNavigationView bottomNavigationView;
@@ -54,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mRecyclerView = findViewById(R.id.recycleview);
         fetchDataFromApi(); // 发起网络请求
+
 
         mMyAdapter = new MyAdapter();
         mRecyclerView.setAdapter(mMyAdapter);//将数据通过适配器绑在RV上
@@ -113,7 +122,52 @@ public class MainActivity extends AppCompatActivity {
                     return false;
                 }
         });
+        returnTop=findViewById(R.id.fab);
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                //获得recyclerView的线性布局管理器
+                LinearLayoutManager manager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                //获取到第一个item的显示的下标  不等于0表示第一个item处于不可见状态 说明列表没有滑动到顶部 显示回到顶部按钮
+                int firstVisibleItemPosition = manager.findFirstVisibleItemPosition();
+                // 当不滚动时
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    // 判断是否滚动超过一屏
+                    if (firstVisibleItemPosition == 0) {
+                        returnTop.hide();
+                    } else {
+                        //显示回到顶部按钮
+                        returnTop.show();
+                        returnTop.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                recyclerView.scrollToPosition(0);
+                            }
+                        });
+
+                    }//获取RecyclerView滑动时候的状态
+                } else if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {//拖动中
+                    returnTop.hide();
+                }
+                }
+            });
+        }
+
+    private void refreshData() {
+        newsDTOList.clear();
+        filteredList.clear();
+        fetchDataFromApi();
+        new android.os.Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefreshLayout.setRefreshing(false);
+
+            }
+        },2000);
     }
+
+
 
     private void initData() {
         list = new ArrayList<>();

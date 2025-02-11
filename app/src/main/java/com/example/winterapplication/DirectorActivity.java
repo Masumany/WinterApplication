@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -37,6 +38,8 @@ public class DirectorActivity extends AppCompatActivity {
     List<DirectorNews.Articles> newsDtoList = new ArrayList<>();
 
     private SearchView searchView;
+
+    private FloatingActionButton returnTop;
     List<DirectorNews.Articles> filteredList = new ArrayList<>();
     private BottomNavigationView bottomNavigationView;
 
@@ -70,6 +73,36 @@ public class DirectorActivity extends AppCompatActivity {
 
         initView();
         initClick();
+
+        returnTop=findViewById(R.id.fab);
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                LinearLayoutManager manager=(LinearLayoutManager) recyclerView.getLayoutManager();
+                int firstVisibleItemPosition = manager.findFirstVisibleItemPosition();
+                // 当不滚动时
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    // 判断是否滚动超过一屏
+                    if (firstVisibleItemPosition == 0) {
+                        returnTop.hide();
+                    } else {
+                        //显示回到顶部按钮
+                        returnTop.show();
+                        returnTop.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                recyclerView.scrollToPosition(0);
+                            }
+                        });
+
+                    }//获取RecyclerView滑动时候的状态
+                } else if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {//拖动中
+                    returnTop.hide();
+                }
+            }
+
+        });
 
         // 为 ImageView 设置点击事件
         bottomNavigationView = findViewById(R.id.bottom_navigation);

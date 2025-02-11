@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -35,6 +36,8 @@ public class SquareActivity extends AppCompatActivity {
     List<SquareNew.Datas> data = new ArrayList<SquareNew.Datas>();
     private TextView BackTextView;
 
+    private FloatingActionButton returnTop;
+
     List<SquareNew.Datas> filteredList=new ArrayList<>();
 
     @Override
@@ -44,6 +47,35 @@ public class SquareActivity extends AppCompatActivity {
 
         mRecyclerView = findViewById(R.id.re);
         fetchDataFromApi(); // 发起网络请求
+
+        returnTop=findViewById(R.id.fab);
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                LinearLayoutManager manager=(LinearLayoutManager) recyclerView.getLayoutManager();
+                int firstVisibleItemPosition = manager.findFirstVisibleItemPosition();
+                // 当不滚动时
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    // 判断是否滚动超过一屏
+                    if (firstVisibleItemPosition == 0) {
+                        returnTop.hide();
+                    } else {
+                        //显示回到顶部按钮
+                        returnTop.show();
+                        returnTop.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                recyclerView.scrollToPosition(0);
+                            }
+                        });
+
+                    }//获取RecyclerView滑动时候的状态
+                } else if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {//拖动中
+                    returnTop.hide();
+                }
+            }
+        });
 
         searchView=findViewById(R.id.searchView);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

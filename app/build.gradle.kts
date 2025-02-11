@@ -40,6 +40,7 @@ dependencies {
     implementation ("io.github.youth5201314:banner:2.2.2")
     implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation ("pl.droidsonroids.gif:android-gif-drawable:1.2.25")
+    implementation ("androidx.viewpager2:viewpager2:1.1.0")
 
 
     implementation(libs.appcompat)
