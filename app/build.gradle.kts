@@ -41,6 +41,7 @@ dependencies {
     implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation ("pl.droidsonroids.gif:android-gif-drawable:1.2.25")
     implementation ("androidx.viewpager2:viewpager2:1.1.0")
+    implementation ("com.github.bumptech.glide:glide:4.14.2")
 
 
     implementation(libs.appcompat)

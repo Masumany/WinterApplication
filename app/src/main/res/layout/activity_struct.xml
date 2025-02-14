@@ -51,28 +51,43 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- 提示文本 -->
-
-    <ImageView
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/st_article"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="50dp"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="16dp"
-       android:src="@drawable/st_content"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/selector_button"
+        android:text="文章入口>>"
+        android:textColor="#FAFAFA"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView" />
 
+
     <!-- 搜索框 -->
+
     <SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="40dp"
-        android:queryHint="搜索体系"
+        android:layout_marginTop="4dp"
+        android:queryHint="搜索体系名称"
         app:iconifiedByDefault="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/st_article" />
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
     <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView

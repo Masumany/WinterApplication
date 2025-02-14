@@ -18,6 +18,7 @@ import androidx.constraintlayout.helper.widget.Carousel;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
@@ -42,6 +43,7 @@ public class StructArticle extends AppCompatActivity {
     private SearchView searchView;
 
     private FloatingActionButton returnTop;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     List<WanAndroidArticleResponse.Data.Article> filteredList=new ArrayList<>();
 
@@ -51,10 +53,21 @@ public class StructArticle extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_structarticle);
 
+        swipeRefreshLayout=findViewById(R.id.swiperefreshlayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                freshData();
+            }
+        });
+
         mRecyclerView = findViewById(R.id.re);
         fetchDataFromApi(); // 发起网络请求
 
-        searchView=findViewById(R.id.searchView);
+        searchView = findViewById(R.id.searchView);
+        searchView.setIconified(false);
+        searchView.setFocusableInTouchMode(true);
+        searchView.requestFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -104,20 +117,36 @@ public class StructArticle extends AppCompatActivity {
         initClick();
     }
 
+    private void freshData() {
+        swipeRefreshLayout.setRefreshing(true);
+        new android.os.Handler().postDelayed(()->{
+            if (swipeRefreshLayout!=null&&swipeRefreshLayout.isRefreshing()){
+                swipeRefreshLayout.setRefreshing(false);
+            }
+            runOnUiThread(()->{
+                articleList.clear();
+                filteredList.clear();
+                mAdapter.notifyDataSetChanged();
+                fetchDataFromApi();
+
+            });
+        },1500);
+    }
+
     private  void filter(String text){
-        filteredList.clear();
-        if (TextUtils.isEmpty(text)){
-            filteredList.addAll(articleList);
-        }else {
-            for (WanAndroidArticleResponse.Data.Article item:articleList){
-                if (item.title.contains(text)){
-                    filteredList.add(item);
+        runOnUiThread(()->{
+            filteredList.clear();
+            if (TextUtils.isEmpty(text)){
+                filteredList.addAll(articleList);
+            }else {
+                for (WanAndroidArticleResponse.Data.Article item:articleList){
+                    if (item.title.contains(text)){
+                        filteredList.add(item);
+                    }
                 }
             }
-        }
-       mAdapter.notifyDataSetChanged();
-
-
+            mAdapter.notifyDataSetChanged();
+        });
     }
 
     private void fetchDataFromApi() {
@@ -146,9 +175,13 @@ public class StructArticle extends AppCompatActivity {
         Gson gson = new Gson();
         WanAndroidArticleResponse response = gson.fromJson(result, WanAndroidArticleResponse.class);
         if (response!= null && response.data!= null) {
-            articleList.addAll(response.data.datas);
-            filteredList.addAll(response.data.datas);
-            runOnUiThread(() -> mAdapter.notifyDataSetChanged());
+            runOnUiThread(()->{
+                articleList.clear();
+                filteredList.clear();
+                articleList.addAll(response.data.datas);
+                filteredList.addAll(response.data.datas);
+                mAdapter.notifyDataSetChanged();
+            });
         }
     }
 

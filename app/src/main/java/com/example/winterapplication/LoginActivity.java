@@ -13,10 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import androidx.appcompat.app.AppCompatActivity;
-
-
 
 public class LoginActivity extends AppCompatActivity {
     private EditText passwordEditText;
@@ -24,10 +21,6 @@ public class LoginActivity extends AppCompatActivity {
     private Button mBtnLogin;
     private EditText nameEditText;
     private boolean isPasswordVisible = false;
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,16 +32,14 @@ public class LoginActivity extends AppCompatActivity {
         eyeImageView = findViewById(R.id.eyeImageView);
         mBtnLogin = findViewById(R.id.btn_main_login);
 
-        TextView registerText=findViewById(R.id.registerText);
+        TextView registerText = findViewById(R.id.registerText);
         registerText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(LoginActivity.this,RegisterActivity.class);
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
-
             }
         });
-
 
         // 为小眼睛图标添加点击事件监听器
         eyeImageView.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +59,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
         // 为登录按钮添加点击事件
         mBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,12 +67,10 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
         SharedPreferences sharedPreferences = getSharedPreferences("user_data", MODE_PRIVATE);
         String username = sharedPreferences.getString("username", "");
         String password = sharedPreferences.getString("password", "");
     }
-
 
     private void login() {
         String username = nameEditText.getText().toString();
@@ -97,15 +85,20 @@ public class LoginActivity extends AppCompatActivity {
 
     private void loginFail() {
         Toast.makeText(this, "登陆失败,请再试一试吧！", Toast.LENGTH_SHORT).show();
-
     }
-
 
     private void loginSuccess() {
         Toast.makeText(this, "登陆成功喽！", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        startActivity(intent);
+        // 保存登录状态
+        SharedPreferences sharedPreferences = getSharedPreferences("user_data", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("isLoggedIn", true);
+        editor.apply();
 
+        // 设置返回结果
+        Intent resultIntent = new Intent();
+        setResult(RESULT_OK, resultIntent);
 
+        finish();
     }
 }

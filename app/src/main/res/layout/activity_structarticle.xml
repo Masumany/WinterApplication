@@ -5,15 +5,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white">
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/re"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swiperefreshlayout"
         android:layout_width="match_parent"
-        android:layout_height="630dp"
+        android:layout_height="0dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="72dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/re"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <SearchView
         android:id="@+id/searchView"
@@ -52,8 +57,8 @@
     <TextView
         android:id="@+id/net_back"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginStart="304dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="4dp"
         android:background="#F8D8FD"
         android:text="返回"

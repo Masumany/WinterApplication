@@ -61,7 +61,7 @@
         android:layout_height="20dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="12dp"
-        android:queryHint="搜索导航"
+        android:queryHint="搜索导航名称"
         app:iconifiedByDefault="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.432"
@@ -72,6 +72,16 @@
     <!-- 列表 -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/dt_rv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="24dp"

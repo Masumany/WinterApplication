@@ -1,18 +1,20 @@
 package com.example.winterapplication;
 
-
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.GestureDetector;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,13 +23,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import com.youth.banner.Banner;
-import com.youth.banner.adapter.BannerImageAdapter;
-import com.youth.banner.holder.BannerImageHolder;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -44,8 +44,6 @@ public class MainActivity extends AppCompatActivity {
     MyAdapter mMyAdapter;
     List<News.Data.Datas> newsDTOList = new ArrayList<>();
 
-    private List<Integer> list = new ArrayList<>();
-
     private SearchView searchView;
 
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -56,34 +54,33 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
 
+    private ViewFlipper viewFlipper;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         mRecyclerView = findViewById(R.id.recycleview);
         fetchDataFromApi(); // 发起网络请求
-
 
         mMyAdapter = new MyAdapter();
         mRecyclerView.setAdapter(mMyAdapter);//将数据通过适配器绑在RV上
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));//线性布局
 
-        Banner banner = findViewById(R.id.banner);
-        initData();
-        banner.setAdapter(new BannerImageAdapter<Integer>(list) {
-            @Override
-            public void onBindView(BannerImageHolder holder, Integer data, int position, int size) {
-                holder.imageView.setImageResource(list.get(position));
-                holder.imageView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(MainActivity.this, "第" + (position + 1) + "张图片", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        }).start();
+       swipeRefreshLayout=findViewById(R.id.swiperefreshlayout);
+       swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+           @Override
+           public void onRefresh() {
+               refreshData();
+           }
+       });
 
         searchView = findViewById(R.id.searchView);
+        searchView.setIconified(false);
+        searchView.setFocusableInTouchMode(true);
+        searchView.requestFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -101,28 +98,28 @@ public class MainActivity extends AppCompatActivity {
         // 初始化底部导航栏
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
-
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.navigation_home) {
-                        return true;
-                    } else if (item.getItemId() == R.id.navigation_structure) {
-                        Intent intent1 = new Intent(MainActivity.this, StructActivity.class);
-                        startActivity(intent1);
-                        return true;
-                    } else if (item.getItemId() == R.id.navigation_director) {
-                        Intent intent2 = new Intent(MainActivity.this, DirectorActivity.class);
-                        startActivity(intent2);
-                        return true;
-                    } else if (item.getItemId() == R.id.navigation_mine) {
-                        Intent intent3 = new Intent(MainActivity.this, MineActivity.class);
-                        startActivity(intent3);
-                        return true;
-                    }
-                    return false;
+                    return true;
+                } else if (item.getItemId() == R.id.navigation_structure) {
+                    Intent intent1 = new Intent(MainActivity.this, StructActivity.class);
+                    startActivity(intent1);
+                    return true;
+                } else if (item.getItemId() == R.id.navigation_director) {
+                    Intent intent2 = new Intent(MainActivity.this, DirectorActivity.class);
+                    startActivity(intent2);
+                    return true;
+                } else if (item.getItemId() == R.id.navigation_mine) {
+                    Intent intent3 = new Intent(MainActivity.this, MineActivity.class);
+                    startActivity(intent3);
+                    return true;
                 }
+                return false;
+            }
         });
-        returnTop=findViewById(R.id.fab);
+
+        returnTop = findViewById(R.id.fab);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -145,49 +142,50 @@ public class MainActivity extends AppCompatActivity {
                                 recyclerView.scrollToPosition(0);
                             }
                         });
-
-                    }//获取RecyclerView滑动时候的状态
+                    }
                 } else if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {//拖动中
                     returnTop.hide();
                 }
-                }
-            });
-        }
-
-    private void refreshData() {
-        newsDTOList.clear();
-        filteredList.clear();
-        fetchDataFromApi();
-        new android.os.Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                swipeRefreshLayout.setRefreshing(false);
-
             }
-        },2000);
+        });
+
+        // 初始化 ViewFlipper
+        viewFlipper = findViewById(R.id.viewFlipper);
+        fetchBannerData();
     }
 
-
-
-    private void initData() {
-        list = new ArrayList<>();
-        list.add(R.drawable.main_wan);
-        list.add(R.drawable.main_wan3);
-        list.add(R.drawable.main_wan2);
+    private void refreshData() {
+        swipeRefreshLayout.setRefreshing(true);
+        new android.os.Handler().postDelayed(() -> {
+            if (swipeRefreshLayout != null && swipeRefreshLayout.isRefreshing()) {
+                swipeRefreshLayout.setRefreshing(false);
+            }
+            // 清空数据
+            runOnUiThread(() -> {
+                newsDTOList.clear();
+                filteredList.clear();
+                mMyAdapter.notifyDataSetChanged();
+            });
+            // 重新获取数据
+            fetchDataFromApi();
+        }, 1500);
     }
 
     private void filter(String text) {
-        filteredList.clear();
-        if (TextUtils.isEmpty(text)) {
-            filteredList.addAll(newsDTOList);
-        } else {
-            for (News.Data.Datas item : newsDTOList) {
-                if (item.title.contains(text)) {
-                    filteredList.add(item);
+        runOnUiThread(() -> {
+            filteredList.clear();
+            if (TextUtils.isEmpty(text)) {
+                filteredList.addAll(newsDTOList);
+            } else {
+                for (News.Data.Datas item : newsDTOList) {
+                    if (item.title.contains(text)) {
+                        filteredList.add(item);
+                    }
                 }
             }
-        }
-        mMyAdapter.notifyDataSetChanged();
+            // 通知 RecyclerView 数据已更新
+            mMyAdapter.notifyDataSetChanged();
+        });
     }
 
     private void fetchDataFromApi() {
@@ -213,26 +211,90 @@ public class MainActivity extends AppCompatActivity {
     private void handleResponse(String result) {
         try {
             Gson gson = new Gson();
-            News news = gson.fromJson(result, News.class);//使用 Gson 将 result 字符串解析为 News 类型的对象
+            News news = gson.fromJson(result, News.class);
             if (news != null && news.data != null && news.data.datas != null) {
-                newsDTOList.addAll(news.data.datas);
-                filteredList.addAll(news.data.datas);
-                runOnUiThread(() -> mMyAdapter.notifyDataSetChanged());//将 mMyAdapter.notifyDataSetChanged() 操作放在 runOnUiThread 中执行，因为更新 RecyclerView 的数据必须在 UI 线程中进行
+                runOnUiThread(() -> {
+                    // 清空原有数据
+                    newsDTOList.clear();
+                    filteredList.clear();
+                    // 添加新数据
+                    newsDTOList.addAll(news.data.datas);
+                    filteredList.addAll(news.data.datas);
+                    // 通知 RecyclerView 数据已更新
+                    mMyAdapter.notifyDataSetChanged();
+                });
             }
         } catch (JsonSyntaxException e) {
             runOnUiThread(() -> Toast.makeText(MainActivity.this, "JSON 解析失败：" + e.getMessage(), Toast.LENGTH_SHORT).show());
         }
     }
 
-    class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {//自定义的 RecyclerView 适配器类，用于将 newsDTOList 中的数据绑定到 RecyclerView 的列表项上
+    private void fetchBannerData() {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url("https://www.wanandroid.com/banner/json")
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                runOnUiThread(() -> Toast.makeText(MainActivity.this, "网络请求失败：" + e.getMessage(), Toast.LENGTH_SHORT).show());
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                String responseData = response.body().string();
+                parseBannerData(responseData);
+            }
+        });
+    }
+
+    private void parseBannerData(String responseData) {
+        Gson gson = new Gson();
+        MainBannerNew mainBannerNew = gson.fromJson(responseData, MainBannerNew.class);
+        if (mainBannerNew != null && mainBannerNew.data != null) {
+            final List<MainBannerNew.Data> datas = mainBannerNew.data;
+            runOnUiThread(() -> {
+                // 清空原有的视图
+                viewFlipper.removeAllViews();
+                for (int i = 0; i < datas.size(); i++) {
+                    final MainBannerNew.Data data = datas.get(i);
+                    ImageView imageView = new ImageView(MainActivity.this);
+                    imageView.setLayoutParams(new ViewGroup.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.MATCH_PARENT
+                    ));
+                    imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                    Glide.with(MainActivity.this)
+                            .load(data.imagePath)
+                            .into(imageView);
+
+                    // 设置图片点击事件
+                    imageView.setOnClickListener(v -> {
+                        String url = data.url;
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                        startActivity(intent);
+                    });
+
+                    viewFlipper.addView(imageView);
+                }
+                // 开始自动翻转
+                viewFlipper.startFlipping();
+            });
+        } else {
+            runOnUiThread(() -> Toast.makeText(MainActivity.this, "数据解析失败", Toast.LENGTH_SHORT).show());
+        }
+    }
+
+    class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         @Override
-        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {//创建 ViewHolder 的方法，使用 getLayoutInflater().inflate 方法将 news_item_layout 布局文件转换为视图，并创建 MyViewHolder 实例
+        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = getLayoutInflater().inflate(R.layout.news_item_layout, parent, false);
             return new MyViewHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(MyViewHolder holder, int position) {//将数据绑定到 ViewHolder 的方法，根据位置从 newsDTOList 中获取 News.Data.Datas 类型的数据，将数据设置到 holder 的 TextView 中，并为 itemView 设置点击事件，点击后跳转到 ArticleContentActivity 并传递数据
+        public void onBindViewHolder(MyViewHolder holder, int position) {
             News.Data.Datas newsDTo = filteredList.get(position);
             holder.title.setText(newsDTo.title);
             holder.author.setText(newsDTo.author);
@@ -252,15 +314,13 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public int getItemCount() {
             return filteredList.size();
-        }//返回 newsDTOList 的大小，用于确定 RecyclerView
-
+        }
 
         class MyViewHolder extends RecyclerView.ViewHolder {
             TextView title;
             TextView author;
             TextView niceDate;
             TextView zan;
-
 
             MyViewHolder(View itemView) {
                 super(itemView);
@@ -272,23 +332,30 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     static class News {
         Data data;
 
-
         static class Data {
             List<Datas> datas;
-
 
             static class Datas {
                 int zan;
                 String author;
                 String niceDate;
                 String title;
-
                 String link;
             }
         }
     }
+
+    static class MainBannerNew {
+        List<Data> data;
+
+        static class Data {
+            String imagePath;
+            String url;
+        }
+    }
+
+
 }

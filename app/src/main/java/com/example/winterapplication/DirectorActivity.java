@@ -49,6 +49,9 @@ public class DirectorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_director);
 
         searchView = findViewById(R.id.searchView);
+        searchView.setIconified(false);
+        searchView.setFocusableInTouchMode(true);
+        searchView.requestFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {

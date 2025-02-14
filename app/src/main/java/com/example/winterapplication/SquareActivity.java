@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
@@ -40,10 +41,20 @@ public class SquareActivity extends AppCompatActivity {
 
     List<SquareNew.Datas> filteredList=new ArrayList<>();
 
+    private SwipeRefreshLayout swipeRefreshLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_square);
+
+        swipeRefreshLayout=findViewById(R.id.swiperefreshlayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshData();
+            }
+        });
 
         mRecyclerView = findViewById(R.id.re);
         fetchDataFromApi(); // 发起网络请求
@@ -77,7 +88,10 @@ public class SquareActivity extends AppCompatActivity {
             }
         });
 
-        searchView=findViewById(R.id.searchView);
+        searchView = findViewById(R.id.searchView);
+        searchView.setIconified(false);
+        searchView.setFocusableInTouchMode(true);
+        searchView.requestFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -98,18 +112,38 @@ public class SquareActivity extends AppCompatActivity {
         initClick();
 
     }
+
+    private void refreshData() {
+        swipeRefreshLayout.setRefreshing(true);
+        new android.os.Handler().postDelayed(()->{
+            if(swipeRefreshLayout!=null&&swipeRefreshLayout.isRefreshing()){
+                swipeRefreshLayout.setRefreshing(false);
+            }
+            runOnUiThread(()->{
+                data.clear();
+                filteredList.clear();
+                mAdapter.notifyDataSetChanged();
+            });
+            fetchDataFromApi();
+        },1500);
+    }
+
     private  void filter(String text){
-        filteredList.clear();
-        if (TextUtils.isEmpty(text)){
-            filteredList.addAll(data);
-        }else {
-            for (SquareNew.Datas item:data){
-                if (item.title.contains(text)){
-                    filteredList.add(item);
+        runOnUiThread(()->{
+            filteredList.clear();
+            if (TextUtils.isEmpty(text)){
+                filteredList.addAll(data);
+            }else {
+                for (SquareNew.Datas item:data){
+                    if (item.title.contains(text)){
+                        filteredList.add(item);
+                    }
                 }
             }
-        }
-        mAdapter.notifyDataSetChanged();
+            mAdapter.notifyDataSetChanged();
+
+
+        });
 
 
     }
@@ -143,9 +177,13 @@ public class SquareActivity extends AppCompatActivity {
         Gson gson = new Gson();
         SquareNew response = gson.fromJson(result, SquareNew.class);
         if (response != null && response.data != null) {
-            data.addAll(response.data.datas);
-            filteredList.addAll(data);
-            runOnUiThread(() -> mAdapter.notifyDataSetChanged());
+            runOnUiThread(()->{
+                data.clear();
+                filteredList.clear();
+                data.addAll(response.data.datas);
+                filteredList.addAll(data);
+                mAdapter.notifyDataSetChanged();
+            });
         }
     }
 

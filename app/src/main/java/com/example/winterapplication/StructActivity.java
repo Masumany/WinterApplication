@@ -48,6 +48,8 @@ public class StructActivity extends AppCompatActivity {
 
     private FloatingActionButton returnTop;
 
+    private Button button;
+
 
     List<StructNew.Category.SubCategory> filteredList=new ArrayList<>();
     private BottomNavigationView bottomNavigationView;
@@ -56,8 +58,10 @@ public class StructActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_struct);
-
-        searchView=findViewById(R.id.searchView);
+        searchView = findViewById(R.id.searchView);
+        searchView.setIconified(false);
+        searchView.setFocusableInTouchMode(true);
+        searchView.requestFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -131,8 +135,8 @@ public class StructActivity extends AppCompatActivity {
 
         });
         bottomNavigationView.setSelectedItemId(R.id.navigation_structure);
-        ImageView imgView=findViewById(R.id.st_article);
-        imgView.setOnClickListener(new View.OnClickListener() {
+        Button button1=findViewById(R.id.st_article);
+        button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(StructActivity.this,StructArticle.class);
