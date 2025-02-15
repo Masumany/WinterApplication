@@ -34,12 +34,12 @@ public class SquareActivity extends AppCompatActivity {
 
     private SearchView searchView;
     RecyclerView.Adapter mAdapter;
-    List<SquareNew.Datas> data = new ArrayList<SquareNew.Datas>();
+    List<SquareNews.Datas> data = new ArrayList<SquareNews.Datas>();
     private TextView BackTextView;
 
     private FloatingActionButton returnTop;
 
-    List<SquareNew.Datas> filteredList=new ArrayList<>();
+    List<SquareNews.Datas> filteredList=new ArrayList<>();
 
     private SwipeRefreshLayout swipeRefreshLayout;
 
@@ -134,7 +134,7 @@ public class SquareActivity extends AppCompatActivity {
             if (TextUtils.isEmpty(text)){
                 filteredList.addAll(data);
             }else {
-                for (SquareNew.Datas item:data){
+                for (SquareNews.Datas item:data){
                     if (item.title.contains(text)){
                         filteredList.add(item);
                     }
@@ -175,7 +175,7 @@ public class SquareActivity extends AppCompatActivity {
 
     private void handleResponse(String result) {
         Gson gson = new Gson();
-        SquareNew response = gson.fromJson(result, SquareNew.class);
+        SquareNews response = gson.fromJson(result, SquareNews.class);
         if (response != null && response.data != null) {
             runOnUiThread(()->{
                 data.clear();
@@ -196,7 +196,7 @@ public class SquareActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull Adapter.MyViewHolder holder, int position) {
-            SquareNew.Datas datas=filteredList.get(position);
+            SquareNews.Datas datas=filteredList.get(position);
             holder.title.setText(datas.title);
             holder.niceDate.setText(datas.niceDate);
             holder.itemView.setOnClickListener(view -> {
@@ -250,11 +250,11 @@ public class SquareActivity extends AppCompatActivity {
 class SquareNews{
     private  int errorCode;
     private  String errorMsg;
-    SquareNew.Data data;
+    Data data;
 
     static class Data{
         private   int curPage;
-        List<SquareNew.Datas> datas;
+        List<Datas> datas;
         private int offset;
         private boolean over;
         private int pageCount;
@@ -281,7 +281,7 @@ class SquareNews{
         private  int id;
         private  boolean isAdminAdd;
 
-        private String link;
+        String link;
         String niceDate;
         private String niceShareData;
         private String origin;
