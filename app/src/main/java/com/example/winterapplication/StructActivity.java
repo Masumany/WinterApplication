@@ -42,13 +42,10 @@ public class StructActivity extends AppCompatActivity {
     RecyclerView mRecyclerView;
     RecyclerView.Adapter mAdapter;
     List<StructNew.Category.SubCategory> newsDtoList = new ArrayList<>();
-    private TextView BackTextView;
 
     private SearchView searchView;
 
     private FloatingActionButton returnTop;
-
-    private Button button;
 
 
     List<StructNew.Category.SubCategory> filteredList=new ArrayList<>();
@@ -143,8 +140,7 @@ public class StructActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        initView();
-        initClick();
+
     }
 
     private  void filter(String text){
@@ -236,35 +232,16 @@ public class StructActivity extends AppCompatActivity {
     }
 
 
-    private void initClick() {
-        if (BackTextView!= null) {
-            BackTextView.setOnClickListener(v -> {
-                Intent intent = new Intent(StructActivity.this, MainActivity.class);
-                // 启动该意图，实现页面跳转到首页面
-                startActivity(intent);
-                finish();
-            });
-        } else {
-            Log.e("StructActivity", "BackTextView is null");
-        }
-    }
-
-
-    private void initView() {
-        BackTextView = findViewById(R.id.net_back);
-    }
-}
-
 
 class StructNew {
     List<Category> data;
 
-    static class Category {
+     class Category {
         private String name;
         private int order;
         List<SubCategory> children;
 
-        static class SubCategory {
+         class SubCategory {
             public String name;
             private int id;
             private int courseId;
@@ -275,5 +252,6 @@ class StructNew {
             private boolean userControlSetTop;
             private int visible;
         }
+    }
     }
 }

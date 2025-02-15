@@ -16,10 +16,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity {
-    private EditText passwordEditText;
-    private ImageView eyeImageView;
-    private Button mBtnLogin;
-    private EditText nameEditText;
     private boolean isPasswordVisible = false;
 
     @Override
@@ -27,78 +23,76 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        nameEditText = findViewById(R.id.et_main_username);
-        passwordEditText = findViewById(R.id.et_main_password);
-        eyeImageView = findViewById(R.id.eyeImageView);
-        mBtnLogin = findViewById(R.id.btn_main_login);
-
+        EditText nameEditText = findViewById(R.id.et_main_username);
+        EditText passwordEditText = findViewById(R.id.et_main_password);
+        ImageView eyeImageView = findViewById(R.id.eyeImageView);
+        Button mBtnLogin = findViewById(R.id.btn_main_login);
         TextView registerText = findViewById(R.id.registerText);
+
+
+
         registerText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
 
-        // 为小眼睛图标添加点击事件监听器
         eyeImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isPasswordVisible) {
-                    // 隐藏密码
                     passwordEditText.setTransformationMethod(PasswordTransformationMethod.getInstance());
                     isPasswordVisible = false;
-                    eyeImageView.setImageResource(R.drawable.eye_close); // 替换为闭眼图标
+                    eyeImageView.setImageResource(R.drawable.eye_close);
                 } else {
-                    // 显示密码
                     passwordEditText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                     isPasswordVisible = true;
-                    eyeImageView.setImageResource(R.drawable.eye_open); // 替换睁眼图标
+                    eyeImageView.setImageResource(R.drawable.eye_open);
                 }
             }
         });
 
-        // 为登录按钮添加点击事件
         mBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login();
+                String username = nameEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
+                Log.d("LoginActivity", "输入的用户名: " + username + ", 输入的密码: " + password);
+
+                SharedPreferences sharedPreferences = getSharedPreferences("user_data", MODE_PRIVATE);
+                String savedUsername = sharedPreferences.getString("username", "");
+                String savedPassword = sharedPreferences.getString("password", "");
+
+                if (username.equals(savedUsername) && password.equals(savedPassword)) {
+                    Toast.makeText(LoginActivity.this, "登陆成功喽！", Toast.LENGTH_SHORT).show();
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean("isLoggedIn", true);
+                    editor.apply();
+
+                    Intent resultIntent = new Intent();
+                    setResult(RESULT_OK, resultIntent);
+                    finish();
+                } else {
+                    Toast.makeText(LoginActivity.this, "登陆失败,请再试一试吧！", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-
-        SharedPreferences sharedPreferences = getSharedPreferences("user_data", MODE_PRIVATE);
-        String username = sharedPreferences.getString("username", "");
-        String password = sharedPreferences.getString("password", "");
     }
 
-    private void login() {
-        String username = nameEditText.getText().toString();
-        String password = passwordEditText.getText().toString();
-        Log.d("LoginActivity", "输入的用户名: " + username + ", 输入的密码: " + password);
-        if (username.equals("Mmy") && password.equals("123456")) {
-            loginSuccess();
-        } else {
-            loginFail();
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            SharedPreferences sharedPreferences = getSharedPreferences("user_data", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("isLoggedIn", true);
+            editor.apply();
+
+            Intent resultIntent = new Intent();
+            setResult(RESULT_OK, resultIntent);
+            finish();
         }
-    }
-
-    private void loginFail() {
-        Toast.makeText(this, "登陆失败,请再试一试吧！", Toast.LENGTH_SHORT).show();
-    }
-
-    private void loginSuccess() {
-        Toast.makeText(this, "登陆成功喽！", Toast.LENGTH_SHORT).show();
-        // 保存登录状态
-        SharedPreferences sharedPreferences = getSharedPreferences("user_data", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("isLoggedIn", true);
-        editor.apply();
-
-        // 设置返回结果
-        Intent resultIntent = new Intent();
-        setResult(RESULT_OK, resultIntent);
-
-        finish();
     }
 }

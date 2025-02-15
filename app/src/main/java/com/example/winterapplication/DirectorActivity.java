@@ -32,7 +32,6 @@ import okhttp3.Response;
 
 public class DirectorActivity extends AppCompatActivity {
 
-    private TextView backTextView;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     List<DirectorNews.Articles> newsDtoList = new ArrayList<>();
@@ -74,8 +73,7 @@ public class DirectorActivity extends AppCompatActivity {
 
         fetchDataFromApi();
 
-        initView();
-        initClick();
+
 
         returnTop=findViewById(R.id.fab);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -186,21 +184,7 @@ public class DirectorActivity extends AppCompatActivity {
             }
     }
 
-    private void initView() {
-        backTextView = findViewById(R.id.net_back);
-    }
 
-    private void initClick() {
-        if (backTextView != null) {
-            backTextView.setOnClickListener(v -> {
-                Intent intent = new Intent(DirectorActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            });
-        } else {
-
-        }
-    }
 
     private class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
         private  List<DirectorNews.Articles> articleList;

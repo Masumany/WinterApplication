@@ -8,47 +8,25 @@
     tools:context=".StructActivity"
     android:background="@color/white">
 
-    <!-- 返回按钮 -->
-    <TextView
-        android:id="@+id/net_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="296dp"
-        android:layout_marginTop="4dp"
-        android:background="#F8D8FD"
-        android:text="返回"
-        android:textColor="#9B5F5F"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <!-- 体系标题 -->
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:gravity="top"
+        android:background="#C5AAF6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#492092"
         android:text="体系"
         android:textSize="25dp"
-        android:shadowColor="#B7BCBC"
+        android:shadowColor="#7B673AB7"
         android:shadowRadius="3.0"
         android:shadowDx="9"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- 顶部横线 -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="28dp"
-        android:text="--------------------------------------------"
-        android:textColor="#3F51B5"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <!-- 提示文本 -->
     <androidx.appcompat.widget.AppCompatButton
@@ -123,6 +101,7 @@
         app:itemIconTint="@color/bottom_nav_item_color"
         app:itemTextColor="@color/bottom_nav_item_color"
         app:labelVisibilityMode="labeled"
+        android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/struct_rv"
         app:menu="@menu/bottom_menu"

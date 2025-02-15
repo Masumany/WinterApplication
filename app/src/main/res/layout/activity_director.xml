@@ -8,42 +8,18 @@
     tools:context=".DirectorActivity"
     android:background="@color/white">
 
-    <!-- 顶部横线 -->
-    <TextView
-        android:id="@+id/topLine"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="24dp"
-        android:text="--------------------------------------------"
-        android:textColor="#3F51B5"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- 返回按钮 -->
-    <TextView
-        android:id="@+id/net_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="296dp"
-        android:layout_marginTop="4dp"
-        android:background="#F8D8FD"
-        android:text="返回"
-        android:textColor="#9B5F5F"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- 导航标题 -->
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:background="#C5AAF6"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="top"
+        android:gravity="center"
         android:text="导航"
         android:textSize="25dp"
-        android:shadowColor="#B7BCBC"
+        android:textColor="#492092"
+        android:shadowColor="#7B673AB7"
         android:shadowRadius="3.0"
         android:shadowDx="9"
         android:textStyle="bold"
@@ -67,7 +43,7 @@
         app:layout_constraintHorizontal_bias="0.432"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintWidth_percent="0.9"
-        app:layout_constraintTop_toBottomOf="@+id/topLine" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <!-- 列表 -->
     <androidx.recyclerview.widget.RecyclerView
@@ -109,6 +85,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
+        android:layout_marginBottom="4dp"
         app:itemIconSize="35dp"
         app:itemIconTint="@color/bottom_nav_item_color"
         app:itemTextColor="@color/bottom_nav_item_color"

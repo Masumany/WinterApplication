@@ -18,7 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MineActivity extends AppCompatActivity {
 
-    private TextView BackTextView, textView, textView1, textView2, logoutTextView,textView3;
+    private TextView textView, textView1, textView2, logoutTextView,textView3;
     private BottomNavigationView bottomNavigationView;
     private ImageView avatarImageView;
     private static final int REQUEST_CODE_LOGIN = 1;
@@ -107,26 +107,8 @@ public class MineActivity extends AppCompatActivity {
                 logout();
             }
         });
-
-        initView();
-        initClick();
     }
 
-    private void initClick() {
-        if (BackTextView != null) {
-            BackTextView.setOnClickListener(v -> {
-                Intent intent = new Intent(MineActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            });
-        } else {
-            Log.e("MineActivity", "BackTextView is null");
-        }
-    }
-
-    private void initView() {
-        BackTextView = findViewById(R.id.net_back);
-    }
 
     private void logout() {
         SharedPreferences sharedPreferences = getSharedPreferences("user_data", MODE_PRIVATE);

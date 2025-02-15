@@ -1,17 +1,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_item1"
-        android:title="常用网站" />
+        android:title="常用网站"
+        android:icon="@drawable/website"/>
     <item
         android:id="@+id/nav_item2"
-        android:title="搜索热词" />
+        android:title="搜索热词"
+        android:icon="@drawable/search"/>
     <item
         android:id="@+id/nav_item3"
-        android:title="问答" />
+        android:title="问答"
+        android:icon="@drawable/answer"/>
     <item
         android:id="@+id/nav_item4"
-        android:title="专栏" />
+        android:title="专栏"
+        android:icon="@drawable/column"/>
     <item
         android:id="@+id/nav_item5"
-        android:title="路线" />
+        android:title="路线"
+        android:icon="@drawable/route"/>
 </menu>
