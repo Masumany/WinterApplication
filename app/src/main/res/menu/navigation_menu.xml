@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_item1"
+        android:title="常用网站" />
+    <item
+        android:id="@+id/nav_item2"
+        android:title="搜索热词" />
+    <item
+        android:id="@+id/nav_item3"
+        android:title="问答" />
+    <item
+        android:id="@+id/nav_item4"
+        android:title="专栏" />
+    <item
+        android:id="@+id/nav_item5"
+        android:title="路线" />
+</menu>

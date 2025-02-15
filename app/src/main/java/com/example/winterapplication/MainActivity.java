@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.GestureDetector;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SearchView;
@@ -18,6 +21,8 @@ import android.widget.ViewFlipper;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,6 +31,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
@@ -44,6 +50,11 @@ public class MainActivity extends AppCompatActivity {
     MyAdapter mMyAdapter;
     List<News.Data.Datas> newsDTOList = new ArrayList<>();
 
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+
+    private ImageView openDrawerButton;
+
     private SearchView searchView;
 
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -61,6 +72,48 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // 获取视图
+        View view = findViewById(R.id.drawer_layout);
+        openDrawerButton = findViewById(R.id.open_drawer_button);
+        // 使用 if-else 进行类型检查
+        if (view instanceof DrawerLayout) {
+            drawerLayout = (DrawerLayout) view;
+            navigationView = findViewById(R.id.nav_view);
+            openDrawerButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // 打开侧边栏
+                    drawerLayout.openDrawer(GravityCompat.START);
+                }
+            });
+            // 设置侧边栏菜单项点击事件
+            navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(MenuItem item) {
+                    int itemId = item.getItemId();
+                    if (itemId == R.id.nav_item1) {
+                        // 处理菜单项1的点击事件
+                        Toast.makeText(MainActivity.this, "菜单项1被点击", Toast.LENGTH_SHORT).show();
+                    } else if (itemId == R.id.nav_item2) {
+                        // 处理菜单项2的点击事件
+                        Toast.makeText(MainActivity.this, "菜单项2被点击", Toast.LENGTH_SHORT).show();
+                    } else if (itemId == R.id.nav_item3) {
+                        // 处理菜单项3的点击事件
+                        Toast.makeText(MainActivity.this, "菜单项3被点击", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // 处理其他未知菜单项的情况
+                        Toast.makeText(MainActivity.this, "未知菜单项被点击", Toast.LENGTH_SHORT).show();
+                    }
+                    // 关闭侧边栏
+                    drawerLayout.closeDrawers();
+                    return true;
+                }
+            });
+        } else {
+            // 若不是 DrawerLayout 类型，给出提示
+            Toast.makeText(this, "获取的视图不是 DrawerLayout 类型", Toast.LENGTH_SHORT).show();
+        }
 
         mRecyclerView = findViewById(R.id.recycleview);
         fetchDataFromApi(); // 发起网络请求
@@ -118,6 +171,10 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+
+
+
 
         returnTop = findViewById(R.id.fab);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {

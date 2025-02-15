@@ -18,7 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MineActivity extends AppCompatActivity {
 
-    private TextView BackTextView, textView, textView1, textView2, logoutTextView;
+    private TextView BackTextView, textView, textView1, textView2, logoutTextView,textView3;
     private BottomNavigationView bottomNavigationView;
     private ImageView avatarImageView;
     private static final int REQUEST_CODE_LOGIN = 1;
@@ -90,6 +90,15 @@ public class MineActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        textView3 = findViewById(R.id.study);
+        textView3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MineActivity.this, StudyActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         // 退出登录点击事件
         logoutTextView.setOnClickListener(new View.OnClickListener() {

@@ -35,6 +35,8 @@
         <activity android:name=".SquareActivity"></activity>
         <activity android:name=".SquareContentActivity"></activity>
         <activity android:name=".MoreActivity"></activity>
+        <activity android:name=".StudyActivity"></activity>
+        <activity android:name=".StudyContentActivity"></activity>
 
     </application>
 

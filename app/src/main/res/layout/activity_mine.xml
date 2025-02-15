@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_marginTop="40dp"
-        android:background="@drawable/mine_use"
+        android:background="#F5F2FD"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
@@ -30,28 +30,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/study"
+        android:layout_width="350dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="416dp"
+        android:text="教程"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/more"
         android:layout_width="350dp"
         android:layout_height="60dp"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="424dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="492dp"
         android:text="更多精彩内容，敬请期待......"
         android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <TextView
         android:id="@+id/mine_text"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:layout_marginStart="80dp"
+        android:layout_marginStart="60dp"
         android:layout_marginTop="264dp"
         android:gravity="center"
         android:text="点击头像登录/注册吧~"
-        android:textColor="#1B0295"
+        android:textColor="#95A4FD"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,11 +79,19 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="424dp"
+        android:layout_marginTop="492dp"
         android:src="@drawable/mine_thing"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="416dp"
+        android:src="@drawable/mine_study"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/mine_user"
@@ -103,11 +120,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="228dp"
-        android:background="#D4C4ED"
+        android:background="#AA7CF2"
         android:clickable="true"
         android:padding="10dp"
         android:text="退出登录QaQ"
-        android:textColor="#3F51B5"
+        android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -117,7 +134,7 @@
         android:id="@+id/net_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="296dp"
         android:layout_marginTop="4dp"
         android:background="#F8D8FD"
         android:text="返回"
@@ -142,7 +159,18 @@
         android:layout_width="500dp"
         android:layout_height="0dp"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="484dp"
+        android:layout_marginTop="476dp"
+        android:text="--------------------------------------------"
+        android:textColor="#C1C1C3"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="500dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="552dp"
         android:text="--------------------------------------------"
         android:textColor="#C1C1C3"
         android:textStyle="bold"
