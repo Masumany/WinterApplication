@@ -37,6 +37,13 @@
         <activity android:name=".MoreActivity"></activity>
         <activity android:name=".StudyActivity"></activity>
         <activity android:name=".StudyContentActivity"></activity>
+        <activity android:name=".UsefulWebsite"></activity>
+        <activity android:name=".UsefulWebsiteContent"></activity>
+        <activity android:name=".HotWords"></activity>
+        <activity android:name=".Answers"></activity>
+        <activity android:name=".AnswersContent"></activity>
+        <activity android:name=".SpecialColumn"></activity>
+        <activity android:name=".Route"></activity>
 
     </application>
 

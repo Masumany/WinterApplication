@@ -37,7 +37,7 @@ import okhttp3.Response;
 public class StructArticle extends AppCompatActivity {
     RecyclerView mRecyclerView;
     RecyclerView.Adapter mAdapter;
-    List<WanAndroidArticleResponse.Data.Article> articleList = new ArrayList<>();
+    List<StructArticleNew.Data.Article> articleList = new ArrayList<>();
     private TextView BackTextView;
 
     private SearchView searchView;
@@ -45,7 +45,7 @@ public class StructArticle extends AppCompatActivity {
     private FloatingActionButton returnTop;
     private SwipeRefreshLayout swipeRefreshLayout;
 
-    List<WanAndroidArticleResponse.Data.Article> filteredList=new ArrayList<>();
+    List<StructArticleNew.Data.Article> filteredList=new ArrayList<>();
 
 
     @Override
@@ -139,7 +139,7 @@ public class StructArticle extends AppCompatActivity {
             if (TextUtils.isEmpty(text)){
                 filteredList.addAll(articleList);
             }else {
-                for (WanAndroidArticleResponse.Data.Article item:articleList){
+                for (StructArticleNew.Data.Article item:articleList){
                     if (item.title.contains(text)){
                         filteredList.add(item);
                     }
@@ -173,7 +173,7 @@ public class StructArticle extends AppCompatActivity {
 
     private void handleResponse(String result) {
         Gson gson = new Gson();
-        WanAndroidArticleResponse response = gson.fromJson(result, WanAndroidArticleResponse.class);
+        StructArticleNew response = gson.fromJson(result, StructArticleNew.class);
         if (response!= null && response.data!= null) {
             runOnUiThread(()->{
                 articleList.clear();
@@ -198,7 +198,7 @@ public class StructArticle extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-            WanAndroidArticleResponse.Data.Article article = filteredList.get(position);
+            StructArticleNew.Data.Article article = filteredList.get(position);
             holder.title.setText(article.title);
             holder.niceDate.setText(article.niceDate);
             holder.zan.setText(String.valueOf(article.zan));
@@ -288,7 +288,7 @@ class StructArticleNew {
             private boolean fresh;
             private int id;
              String link;
-            private String niceDate;
+            String niceDate;
             private String niceShareDate;
             private String origin;
             private String prefix;
@@ -297,11 +297,11 @@ class StructArticleNew {
             private int realSuperChapterId;
             private int selfVisible;
             private long shareDate;
-            private String shareUser;
+            String shareUser;
             private int superChapterId;
             private String superChapterName;
             private List<Tag> tags;
-            private String title;
+            String title;
             private int type;
             private int userId;
             private int visible;

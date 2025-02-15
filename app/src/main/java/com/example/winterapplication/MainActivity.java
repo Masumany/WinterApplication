@@ -93,14 +93,20 @@ public class MainActivity extends AppCompatActivity {
                 public boolean onNavigationItemSelected(MenuItem item) {
                     int itemId = item.getItemId();
                     if (itemId == R.id.nav_item1) {
-                        // 处理菜单项1的点击事件
-                        Toast.makeText(MainActivity.this, "菜单项1被点击", Toast.LENGTH_SHORT).show();
+                       Intent intent=new Intent(MainActivity.this,UsefulWebsite.class);
+                       startActivity(intent);
                     } else if (itemId == R.id.nav_item2) {
-                        // 处理菜单项2的点击事件
-                        Toast.makeText(MainActivity.this, "菜单项2被点击", Toast.LENGTH_SHORT).show();
+                        Intent intent=new Intent(MainActivity.this,HotWords.class);
+                        startActivity(intent);
                     } else if (itemId == R.id.nav_item3) {
-                        // 处理菜单项3的点击事件
-                        Toast.makeText(MainActivity.this, "菜单项3被点击", Toast.LENGTH_SHORT).show();
+                        Intent intent=new Intent(MainActivity.this,Answers.class);
+                        startActivity(intent);
+                    } else if (itemId == R.id.nav_item4) {
+                        Intent intent=new Intent(MainActivity.this,SpecialColumn.class);
+                        startActivity(intent);
+                    } else if (itemId == R.id.nav_item5) {
+                        Intent intent=new Intent(MainActivity.this,Route.class);
+                        startActivity(intent);
                     } else {
                         // 处理其他未知菜单项的情况
                         Toast.makeText(MainActivity.this, "未知菜单项被点击", Toast.LENGTH_SHORT).show();

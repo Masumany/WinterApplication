@@ -2,7 +2,8 @@
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/home"
-        android:title="首页" />
+        android:title="首页"
+        />
     <item
         android:id="@+id/navigation_structure"
         android:icon="@drawable/list"
