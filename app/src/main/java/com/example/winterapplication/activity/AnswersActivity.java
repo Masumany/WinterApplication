@@ -70,7 +70,6 @@ public class AnswersActivity extends AppCompatActivity implements AnswersView {
         });
 
         searchView = findViewById(R.id.searchView);//搜索
-        searchView.setIconified(false);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {//用户提交

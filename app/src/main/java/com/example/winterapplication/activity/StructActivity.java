@@ -68,8 +68,6 @@ public class StructActivity extends AppCompatActivity implements StructView {
 
     // 设置各种事件监听器的方法
     private void setupListeners() {
-        // 设置搜索框默认不收缩
-        searchView.setIconified(false);
         // 为搜索框设置文本变化监听器
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

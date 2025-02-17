@@ -55,7 +55,6 @@ public class DirectorActivity extends AppCompatActivity implements DirectorView 
 
         searchView = findViewById(R.id.searchView);
 
-        searchView.setIconified(false);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

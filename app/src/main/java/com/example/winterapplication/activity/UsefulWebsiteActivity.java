@@ -114,8 +114,7 @@ public class UsefulWebsiteActivity extends AppCompatActivity implements UsefulWe
             }
         });
 
-        // 设置搜索框默认不收缩
-        searchView.setIconified(false);
+
         // 为搜索框设置文本变化监听器
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

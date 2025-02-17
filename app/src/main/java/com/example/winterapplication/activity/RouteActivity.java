@@ -29,19 +29,13 @@ import java.util.List;
 
 public class RouteActivity extends AppCompatActivity implements RouteView {
 
-    private RecyclerView mRecyclerView;
-
-    private SearchView searchView;
-
-    private RecyclerView.Adapter mAdapter;
-
     private final List<RouteNew.Data> data = new ArrayList<>();
-
-    private TextView BackTextView;
-
-    private FloatingActionButton returnTop;
-
     private final List<RouteNew.Data> filteredList = new ArrayList<>();
+    private RecyclerView mRecyclerView;
+    private SearchView searchView;
+    private RecyclerView.Adapter mAdapter;
+    private TextView BackTextView;
+    private FloatingActionButton returnTop;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     private RoutePresenter presenter;
@@ -118,8 +112,7 @@ public class RouteActivity extends AppCompatActivity implements RouteView {
             }
         });
 
-        // 设置搜索框默认不收缩
-        searchView.setIconified(false);
+
         // 为搜索框设置文本变化监听器
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

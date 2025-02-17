@@ -22,12 +22,12 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.example.winterapplication.R;
+import com.example.winterapplication.model.MainModel;
+import com.example.winterapplication.presenter.MainPresenter;
+import com.example.winterapplication.view.MainView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.example.winterapplication.presenter.MainPresenter;
-import com.example.winterapplication.model.MainModel;
-import com.example.winterapplication.view.MainView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     private MyAdapter mMyAdapter;
 
-    private List<News.Data.Datas> newsDTOList = new ArrayList<>();
+    private final List<News.Data.Datas> newsDTOList = new ArrayList<>();
 
     private DrawerLayout drawerLayout;
 
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     private FloatingActionButton returnTop;
 
-    private List<News.Data.Datas> filteredList = new ArrayList<>();
+    private final List<News.Data.Datas> filteredList = new ArrayList<>();
 
     private BottomNavigationView bottomNavigationView;
 
@@ -160,8 +160,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
 
         searchView = findViewById(R.id.searchView);
-        // 设置搜索框默认不收缩
-        searchView.setIconified(false);
         // 为搜索框设置文本变化监听器
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -286,16 +284,11 @@ public class MainActivity extends AppCompatActivity implements MainView {
             // 创建一个 ImageView 用于显示轮播图
             ImageView imageView = new ImageView(MainActivity.this);
             // 设置 ImageView 的布局参数
-            imageView.setLayoutParams(new ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT
-            ));
+            imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             // 设置 ImageView 的缩放类型
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             // 使用 Glide 加载轮播图图片
-            Glide.with(MainActivity.this)
-                    .load(data.imagePath)
-                    .into(imageView);
+            Glide.with(MainActivity.this).load(data.imagePath).into(imageView);
 
             // 为 ImageView 设置点击事件监听器
             imageView.setOnClickListener(v -> {
@@ -332,6 +325,36 @@ public class MainActivity extends AppCompatActivity implements MainView {
     public void filterList(String text) {
         // 调用 Presenter 的过滤方法
         presenter.filter(text);
+    }
+
+    // 新闻数据类
+    public static class News {
+        public Data data;
+
+        public static class Data {
+            public List<Datas> datas;
+
+            public static class Datas {
+
+                public String title;
+                int zan;
+                String author;
+                String niceDate;
+                String link;
+            }
+        }
+    }
+
+    // 轮播图数据类
+    public static class MainBannerNew {
+        public List<Data> data;
+
+        public static class Data {
+
+            String imagePath;
+
+            String url;
+        }
     }
 
     // RecyclerView 的适配器类
@@ -399,40 +422,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
                 zan = itemView.findViewById(R.id.textView5);
             }
-        }
-    }
-
-    // 新闻数据类
-    public static class News {
-        public Data data;
-
-        public static class Data {
-            public List<Datas> datas;
-
-            public static class Datas {
-
-                int zan;
-
-                String author;
-
-                String niceDate;
-
-                public String title;
-
-                String link;
-            }
-        }
-    }
-
-    // 轮播图数据类
-    public static class MainBannerNew {
-        public List<Data> data;
-
-        public static class Data {
-
-            String imagePath;
-
-            String url;
         }
     }
 }
