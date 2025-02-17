@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+
     <uses-permission
         android:name="android.permission.INTERNET"/>
+
     <application
+        android:banner="@drawable/theme_img"
         android:networkSecurityConfig="@xml/network_config"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -15,35 +25,35 @@
         android:theme="@style/Theme.WinterApplication"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity"></activity>
-        <activity android:name=".MineActivity"></activity>
-        <activity android:name=".StructActivity"></activity>
-        <activity android:name=".DirectorActivity"></activity>
-        <activity android:name=".LoginActivity"></activity>
-        <activity android:name=".StructArticle"></activity>
-        <activity android:name=".MainContentActivity"></activity>
-        <activity android:name=".StructContentActivity"></activity>
-        <activity android:name=".DirectorContentActivity"></activity>
-        <activity android:name=".SquareActivity"></activity>
-        <activity android:name=".SquareContentActivity"></activity>
-        <activity android:name=".MoreActivity"></activity>
-        <activity android:name=".StudyActivity"></activity>
-        <activity android:name=".StudyContentActivity"></activity>
-        <activity android:name=".UsefulWebsite"></activity>
-        <activity android:name=".UsefulWebsiteContent"></activity>
-        <activity android:name=".HotWords"></activity>
-        <activity android:name=".Answers"></activity>
-        <activity android:name=".AnswersContent"></activity>
-        <activity android:name=".SpecialColumn"></activity>
-        <activity android:name=".Route"></activity>
+        <activity android:name=".activity.RegisterActivity"></activity>
+        <activity android:name=".activity.MineActivity"></activity>
+        <activity android:name=".activity.StructActivity"></activity>
+        <activity android:name=".activity.DirectorActivity"></activity>
+        <activity android:name=".activity.LoginActivity"></activity>
+        <activity android:name=".activity.StructArticleActivity"></activity>
+        <activity android:name=".activity.MainContentActivity"></activity>
+        <activity android:name=".activity.StructContentActivity"></activity>
+        <activity android:name=".activity.DirectorContentActivity"></activity>
+        <activity android:name=".activity.SquareActivity"></activity>
+        <activity android:name=".activity.SquareContentActivity"></activity>
+        <activity android:name=".activity.MoreActivity"></activity>
+        <activity android:name=".activity.StudyActivity"></activity>
+        <activity android:name=".activity.StudyContentActivity"></activity>
+        <activity android:name=".activity.UsefulWebsiteActivity"></activity>
+        <activity android:name=".activity.UsefulWebsiteContentActivity"></activity>
+        <activity android:name=".activity.HotWordsActivity"></activity>
+        <activity android:name=".activity.AnswersActivity"></activity>
+        <activity android:name=".activity.AnswersContentActivity"></activity>
+        <activity android:name=".activity.SpecialColumnActivity"></activity>
+        <activity android:name=".activity.RouteActivity"></activity>
 
     </application>
 

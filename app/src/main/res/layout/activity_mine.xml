@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MineActivity"
+    tools:context=".activity.MineActivity"
     android:background="@color/white">
 
 
@@ -105,7 +105,7 @@
         android:id="@+id/logout_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="33dp"
         android:layout_marginEnd="228dp"
         android:background="#AA7CF2"
         android:clickable="true"

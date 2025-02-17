@@ -34,8 +34,8 @@
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginStart="304dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="284dp"
+        android:layout_marginTop="40dp"
         android:src="@drawable/zan"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -44,8 +44,8 @@
         android:id="@+id/rv2textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="332dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginStart="312dp"
+        android:layout_marginTop="48dp"
         android:text="zan"
         android:textColor="#FF5722"
         android:textSize="15sp"
