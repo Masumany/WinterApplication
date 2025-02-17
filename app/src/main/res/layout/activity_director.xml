@@ -5,23 +5,23 @@
     android:id="@+id/Director"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.DirectorActivity"
-    android:background="@color/white">
+    android:background="@color/white"
+    tools:context=".activity.DirectorActivity">
 
 
     <!-- 导航标题 -->
     <TextView
         android:id="@+id/textView"
-        android:background="#C5AAF6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#C5AAF6"
         android:gravity="center"
-        android:text="导航"
-        android:textSize="25dp"
-        android:textColor="#492092"
         android:shadowColor="#7B673AB7"
-        android:shadowRadius="3.0"
         android:shadowDx="9"
+        android:shadowRadius="3.0"
+        android:text="导航"
+        android:textColor="#492092"
+        android:textSize="25dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,8 +42,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.432"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintWidth_percent="0.9"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintWidth_percent="0.9" />
 
     <!-- 列表 -->
     <androidx.recyclerview.widget.RecyclerView
@@ -72,8 +72,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="556dp"
         android:background="@color/white"
-        android:src="@drawable/upload"
         android:contentDescription="返回顶部"
+        android:src="@drawable/upload"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.907"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,8 +84,8 @@
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
         android:layout_marginBottom="4dp"
+        android:background="@color/white"
         app:itemIconSize="35dp"
         app:itemIconTint="@color/bottom_nav_item_color"
         app:itemTextColor="@color/bottom_nav_item_color"

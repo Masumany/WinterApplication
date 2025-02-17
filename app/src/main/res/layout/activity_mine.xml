@@ -5,8 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MineActivity"
-    android:background="@color/white">
+    android:background="@color/white"
+    tools:context=".activity.MineActivity">
 
 
     <TextView
@@ -146,16 +146,16 @@
 
     <TextView
         android:id="@+id/textView"
-        android:background="#C5AAF6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#C5AAF6"
         android:gravity="center"
-        android:text="我的"
-        android:textSize="25dp"
         android:shadowColor="#7B673AB7"
-        android:textColor="#492092"
-        android:shadowRadius="3.0"
         android:shadowDx="9"
+        android:shadowRadius="3.0"
+        android:text="我的"
+        android:textColor="#492092"
+        android:textSize="25dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

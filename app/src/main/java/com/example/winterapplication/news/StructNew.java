@@ -6,18 +6,18 @@ public class StructNew {
     public List<Category> data;
 
     public class Category {
+        public List<SubCategory> children;
         private String name;
         private int order;
-        public List<SubCategory> children;
 
         public class SubCategory {
             public String name;
+            String title;
+            int order;
             private int id;
             private int courseId;
             private int parentChapterId;
             private int chapterSort;
-            String title;
-            int order;
             private boolean userControlSetTop;
             private int visible;
         }

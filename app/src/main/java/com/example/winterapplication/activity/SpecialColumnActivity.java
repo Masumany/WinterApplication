@@ -12,8 +12,9 @@ import com.example.winterapplication.R;
 public class SpecialColumnActivity extends AppCompatActivity {
 
     private TextView BackTextView;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_specialcolumn);
@@ -26,7 +27,7 @@ public class SpecialColumnActivity extends AppCompatActivity {
         BackTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(SpecialColumnActivity.this,MainActivity.class);
+                Intent intent = new Intent(SpecialColumnActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -34,7 +35,7 @@ public class SpecialColumnActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        BackTextView=findViewById(R.id.net_back);
+        BackTextView = findViewById(R.id.net_back);
 
     }
 }

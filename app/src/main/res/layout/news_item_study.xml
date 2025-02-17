@@ -3,42 +3,42 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    android:orientation="vertical"
-    android:background="#EAF1F6">
+    android:background="#EAF1F6"
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/imageViewCover"
         android:layout_width="100dp"
         android:layout_height="150dp"
+        android:layout_marginStart="8dp"
         android:scaleType="centerCrop"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginStart="8dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/rv2textView2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="#77AAD3"
-        app:layout_constraintStart_toEndOf="@id/imageViewCover"
-        app:layout_constraintTop_toBottomOf="@id/rv2textView3"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp" />
+        android:layout_marginEnd="8dp"
+        android:textColor="#77AAD3"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imageViewCover"
+        app:layout_constraintTop_toBottomOf="@id/rv2textView3" />
 
     <TextView
         android:id="@+id/rv2textView3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textColor="#3F51B5"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/imageViewCover"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="8dp"
         android:layout_marginTop="25dp"
-        android:layout_marginEnd="8dp" />
+        android:layout_marginEnd="8dp"
+        android:textColor="#3F51B5"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imageViewCover"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,8 +9,8 @@ public class StructArticleNew {
 
 
     public static class Data {
-        private int curPage;
         public List<Article> datas;
+        private int curPage;
         private int offset;
         private boolean over;
         private int pageCount;
@@ -19,12 +19,17 @@ public class StructArticleNew {
 
 
         public static class Article {
+            public String link;
+            public String niceDate;
+            public String shareUser;
+            public String title;
+            public int zan;
+            String author;
+            String chapterName;
             private String apkLink;
             private int audit;
-            String author;
             private boolean canEdit;
             private int chapterId;
-            String chapterName;
             private boolean collect;
             private int courseId;
             private String desc;
@@ -32,8 +37,6 @@ public class StructArticleNew {
             private String envelopePic;
             private boolean fresh;
             private int id;
-            public String link;
-            public String niceDate;
             private String niceShareDate;
             private String origin;
             private String prefix;
@@ -42,16 +45,12 @@ public class StructArticleNew {
             private int realSuperChapterId;
             private int selfVisible;
             private long shareDate;
-            public String shareUser;
             private int superChapterId;
             private String superChapterName;
             private List<Tag> tags;
-            public String title;
             private int type;
             private int userId;
             private int visible;
-            public int zan;
-
 
             static class Tag {
                 private String name;

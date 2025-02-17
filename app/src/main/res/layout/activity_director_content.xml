@@ -2,8 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.DirectorContentActivity"
-    android:background="@color/white">
+    android:background="@color/white"
+    tools:context=".activity.DirectorContentActivity">
 
 
     <TextView
@@ -15,14 +15,13 @@
         android:background="#F8D8FD"
         android:text="返回"
         android:textColor="#9B5F5F"
-        android:textSize="20sp"
-     />
+        android:textSize="20sp" />
 
 
     <WebView
         android:id="@+id/webView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/net_back"/>
+        android:layout_below="@id/net_back" />
 
 </RelativeLayout>

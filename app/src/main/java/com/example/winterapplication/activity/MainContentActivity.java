@@ -8,6 +8,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.winterapplication.R;
@@ -21,12 +22,11 @@ public class MainContentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article_content);
 
-        // 找到布局中的各个 TextView
+
         TextView titleTextView = findViewById(R.id.title_text_view);
         TextView authorTextView = findViewById(R.id.author_text_view);
         TextView niceDateTextView = findViewById(R.id.nice_date_text_view);
 
-        // 找到 WebView
         WebView webView = findViewById(R.id.webView);
 
         // 获取从 MainActivity 传递过来的数据
@@ -58,19 +58,19 @@ public class MainContentActivity extends AppCompatActivity {
     }
 
 
-
     private void initClick() {
-        if (BackTextView!=null){
+        if (BackTextView != null) {
             BackTextView.setOnClickListener(view -> {
-                Intent intent=new Intent(MainContentActivity.this,MainActivity.class);
+                Intent intent = new Intent(MainContentActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             });
         } else {
-        Log.e("MainContentActivity", "BackTextView is null");
+            Log.e("MainContentActivity", "BackTextView is null");
+        }
     }
-    }
+
     private void initView() {
-        BackTextView=findViewById(R.id.net_back);
+        BackTextView = findViewById(R.id.net_back);
     }
 }

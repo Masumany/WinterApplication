@@ -2,14 +2,14 @@ package com.example.winterapplication.news;
 
 import java.util.List;
 
-public class SquareNews{
-    private  int errorCode;
-    private  String errorMsg;
+public class SquareNews {
     public SquareNews.Data data;
+    private int errorCode;
+    private String errorMsg;
 
-    public static class Data{
-        private   int curPage;
+    public static class Data {
         public List<SquareNews.Datas> datas;
+        private int curPage;
         private int offset;
         private boolean over;
         private int pageCount;
@@ -17,7 +17,10 @@ public class SquareNews{
         private int total;
     }
 
-    public static class Datas{
+    public static class Datas {
+        public String link;
+        public String niceDate;
+        public String title;
         private boolean adminAdd;
         private String apkLink;
         private int audit;
@@ -25,19 +28,15 @@ public class SquareNews{
         private boolean canEdit;
         private int chapterId;
         private String chapterName;
-        private  boolean collect;
-        private  int courseId;
+        private boolean collect;
+        private int courseId;
         private String desc;
         private String descMd;
         private String envelopePic;
-
-        private  boolean fresh;
+        private boolean fresh;
         private String host;
-        private  int id;
-        private  boolean isAdminAdd;
-
-        public String link;
-        public String niceDate;
+        private int id;
+        private boolean isAdminAdd;
         private String niceShareData;
         private String origin;
         private String prefix;
@@ -46,10 +45,9 @@ public class SquareNews{
         private int realSuperChapterId;
         private int selfVisible;
         private long shareDate;
-        private  String shareUser;
+        private String shareUser;
         private int superChapterId;
-        private  String superChapterName;
-        public String title;
+        private String superChapterName;
         private int type;
         private int userId;
         private int visible;
