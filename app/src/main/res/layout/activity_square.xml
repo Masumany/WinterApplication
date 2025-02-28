@@ -66,17 +66,6 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:layout_width="500dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="32dp"
-        android:text="-----------------------------------------------------------------------------------------------------------------"
-        android:textColor="#3F51B5"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/net_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

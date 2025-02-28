@@ -12,6 +12,9 @@
     <uses-permission
         android:name="android.permission.INTERNET"/>
 
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:banner="@drawable/theme_img"
         android:networkSecurityConfig="@xml/network_config"
